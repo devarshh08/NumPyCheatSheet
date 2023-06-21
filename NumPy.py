@@ -285,3 +285,59 @@ https://www.geeksforgeeks.org/how-to-set-axis-for-rows-and-columns-in-numpy/
 """
 
 #Reorganizing arrays
+before = np.array([[1, 2, 3, 4], [5, 6, 7, 8]])
+print(before)
+print(sep)
+
+after = before.reshape((2, 2, 2))
+print(after)
+print(sep)
+
+#vertically stacking vectors
+v1 = np.array([1, 2, 3, 4])
+v2 = np.array([5, 6, 7, 8])
+
+print(np.vstack([v1, v2, v1, v2]))
+print(sep)
+
+#horizontally stacking vectors
+h1 = np.ones((2, 4))
+h2 = np.zeros((2, 2))
+
+print(np.hstack((h1, h2)))
+print(sep)
+
+#load data from file
+filedata = np.genfromtxt("E:\\CODING\\GitHub Repos\\NumPyCheatSheet\\data.txt", delimiter = ",")
+print(filedata)
+print(sep)
+
+#to convert type
+print(filedata.astype('int32',))
+print(sep)
+
+#Boolean masking and Advanced indexing
+print(filedata > 50)
+#we can use different types of combinations
+print(sep)
+
+#we can get values as well
+print(filedata[filedata > 50])
+print(sep)
+
+#You can index with a list in numpy
+a = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9])
+print(a[[1, 2, 8]])
+print(sep)
+
+print(np.any(filedata > 50, axis = 0))
+#this checks column wise if any value is greater than 50, it tells true even if single value is greater than 50
+print(sep)
+
+print(np.all(filedata > 50, axis = 0))
+#this also checks columnwise, but only returns true if all values of column are greater than 50
+print(sep)
+
+#all values >50 but <100
+print((filedata > 50) & (filedata < 100))
+print(sep)
