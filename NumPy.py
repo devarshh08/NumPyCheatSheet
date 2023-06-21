@@ -249,4 +249,39 @@ Etc... """
 
 #statistics with numpy
 
-stats = 
+stats = np.array(([1, 2, 3], [4, 5, 6]))
+
+print(np.min(stats))
+print(sep)
+
+#similar like with min, all applies for max
+print(np.max(stats))
+print(sep)
+
+#this axis = 0 will print full row
+print(np.max(stats, axis = 0))
+print(sep)
+
+#axis = 1 will print full column
+print(np.max(stats, axis = 1))
+print(sep)
+
+#sum
+#this will add while matrix
+print(np.sum(stats))
+print(sep)
+
+#this will add columns
+print(np.sum(stats, axis = 0))
+print(sep)
+
+#this will add rows
+print(np.sum(stats, axis = 1))
+print(sep)
+
+"""
+more about axis
+https://www.geeksforgeeks.org/how-to-set-axis-for-rows-and-columns-in-numpy/
+"""
+
+#Reorganizing arrays
