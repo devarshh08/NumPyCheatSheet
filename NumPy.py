@@ -280,6 +280,7 @@ print(np.sum(stats, axis = 1))
 print(sep)
 
 """
+1-D array has 1 axis that is axis 0, 2d array has 2 axes which are axis 0 and axis 1, 3d array has 3 axes, which are axis 0, axis 1 and axis 2 and so on...
 more about axis
 https://www.geeksforgeeks.org/how-to-set-axis-for-rows-and-columns-in-numpy/
 """
@@ -341,3 +342,182 @@ print(sep)
 #all values >50 but <100
 print((filedata > 50) & (filedata < 100))
 print(sep)
+
+#broadcasting in NumPy arrays
+
+# var1 = np.array([1, 2, 3])
+# var2 = np.array([1, 2, 3, 4])
+# print(var1+var2)
+#since size of both arrays is different, so upon adding we get broadcasting error
+
+#for broadcasting, the dimension should be equal
+
+var1 = np.array([1, 2, 3])
+var2 = np.array([[1], [2], [3]])
+print(var1+var2)
+print(sep)
+
+#iterating arrays
+
+a1 = np.array([1, 2, 3, 4, 5])
+for i in a1:
+    print(i)
+
+print(sep)
+
+#iterating 2 dimensional array
+a2 = np.array([[1, 2, 3, 4, 5], [6, 7, 8, 9, 10]])
+for i in a2:
+    for j in i:
+        print(j)
+
+print(sep)
+
+#for 3d we use 3 nested loops and so on...
+#we can also use function nditer
+
+for i in np.nditer(a2):
+    print(i)
+
+print(sep)
+
+#to get index valus as well as data
+for i, d in np.ndenumerate(a2):
+    print(i, d)
+
+print(sep)
+
+#joining arrays
+v11 = np.array([[1, 2], [3, 4]])
+v22 = np.array([[5, 6], [7, 8]])
+arr_new = np.concatenate((v11, v22), axis = 0)
+print("Axis = 0")
+print(arr_new)
+print("VS")
+print("Axis = 1")
+arr_new = np.concatenate((v11, v22), axis = 1)
+print(arr_new)
+print(sep)
+
+#splitting arrays
+arr_split = np.array_split(a1, 3)
+print(arr_split)
+print(type(arr_split))
+print(sep)
+
+#search array
+arr = np.array([1, 2, 3, 4, 4, 3, 2, 4, 4, 2, 6])
+x = np.where(arr == 4)
+print(x) #this prints index nos of where 4 is in the array
+print(sep)
+
+#search sorted array
+#this performs a binary search in array and returns index where specified value would be inserted to maintain the search order
+
+arr1 = np.array([1, 2, 3, 4, 5, 6, 7, 8])
+x1 = np.searchsorted(arr1, 5)
+print(x1) #this will tell position where we can place the entered number(i.e 5)
+print(sep)
+
+arr1 = np.array([1, 2, 3, 4, 9, 10])
+x1 = np.searchsorted(arr1, [5, 6, 7], side = "right") #side = right means it starts to search from right
+print(x1) #this will tell where we can place the whole list of numbers\
+print(sep)
+
+#sort an array
+arr1 = np.array([1, 5, 45, 69, 78, 34, 69, 2, 9 ])
+print(np.sort(arr1))
+print(sep)
+
+#sorting 2d array
+arr2 = np.array([[1, 2], [3, 4]])
+print(np.sort(arr2))
+print(sep)
+
+#sorting string
+str1 = np.array(['a', 'b', 'g', 'h', 'z', 'b', 'B', 'A', 'M', 'Z'])
+print(np.sort(str1))
+print(sep)
+
+#filter array : getting some elements out of an existing array and creating a new array out of them
+str2 = np.array(['a', 'b', 'g', 'h', 'z'])
+f = [True, False, False, True, True]
+new_st = str2[f] #we only get the true data
+print(new_st)
+print(sep)
+
+#NumPy array functions
+#shuffle
+np.random.shuffle(arr1)
+print(arr1)
+print(sep)
+
+#unique
+var1 = np.array([1, 2, 3, 4, 2, 5, 2, 6, 2, 7])
+x = np.unique(var1)
+print(x)
+print(sep)
+
+y = np.unique(var1, return_index = True, return_counts = True) #we also get index no and counting
+print(y)
+print(sep)
+
+#resize
+#np.resize(array, (row, column))
+y = np.resize(var1, (2,3))
+print(y)
+print(sep)
+
+#flatten
+#this can help convert 2d array to 1d array
+#Order of conversion : {C (Flatten in row major : DEFAULT), F (flatten in column major - Fortran Style), A (flatten in column major order if 'a' is fortran *contiguous* in memory, row-major otherwise), K(flatten in order the elements occur in memory)}
+print(y.flatten())
+print(sep)
+
+print(y.flatten(order = "F"))
+print(sep)
+
+#ravel
+print(np.ravel(y))
+print(sep)
+
+print(np.ravel(y, order = "F"))
+print(sep)
+
+#Insert and Delete
+v = np.insert(var1, (2, 3), 30)
+print(v)
+print(sep)
+
+#this does not insert float value, it converts to integer and inserts
+v = np.insert(var1, (1), 1.55)
+print(v)
+print(sep)
+
+#for 2d array
+z = np.array([[1, 2, 3], [4, 5, 6]])
+
+z = np.insert(y, 2 , 6, axis = 0)
+print(z)
+print(sep)
+
+z = np.insert(y, 2 , 6, axis = 1)
+print(z)
+print(sep)
+
+#insert multiple data
+z = np.array([[1, 2, 3], [4, 5, 6]])
+
+z = np.insert(y, 2 , [6, 7, 8], axis = 0)
+print(z)
+print(sep)
+
+z = np.insert(y, 2 , [6, 7], axis = 1)
+print(z)
+print(sep)
+
+#similarly like insert we can use delete
+
+#matrix in np
+var = np.matrix([[1, 2, 3], [4, 5, 6]])
+                
